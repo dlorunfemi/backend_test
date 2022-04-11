@@ -35,9 +35,9 @@ class Repository implements InterfacesRepository
             $formatted[$key] = $value;
         };
 
-        $options = array();
+        // $options = array();
 
-        $formatted['options'] = $options;
+        // $formatted['options'] = $options;
 
         return $formatted;
     }
@@ -55,7 +55,9 @@ class Repository implements InterfacesRepository
 
     public function update(Model $model, $reqs)
     {
+        $model->forceFill($this->formatRequest($reqs, $model))->save();
 
+        return $model;
     }
 
     public function deletable($id)

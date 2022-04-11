@@ -37,7 +37,7 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        $book = $this->repo->create($this->request->all());
+        $book = $this->repo->create($request->all());
 
         return $this->success(['data' => $book], 201);
     }
@@ -60,11 +60,12 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBookRequest $request, Book $book)
+    public function update(UpdateBookRequest $request, $book)
     {
         $book = $this->repo->findOrFail($book);
 
         $book = $this->repo->update($book, $request->all());
+        // dd($book);
 
         return $this->success(['data' => $book]);
     }
@@ -75,7 +76,7 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($book)
     {
         $book = $this->repo->deletable($book);
 
